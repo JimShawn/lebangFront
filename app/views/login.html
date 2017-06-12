@@ -1,0 +1,37 @@
+
+<div ng-controller="LoginController">
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form name="loginForm">
+              <h1>乐榜任务管理系统</h1>
+              <div>
+                <input type="text" name="user" class="form-control" placeholder="账号" required ng-model="userName"/>
+                <span style="color:red" ng-show="loginForm.user.$dirty && loginForm.user.$invalid  || userName.length<4 || userName.length>20">
+                        <span ng-show="loginForm.user.$error.required">请填写账号</span>
+                        <span ng-show="userName.length<4 || userName.length>20">账号长度需大于3小于20</span>
+                </span>
+              </div>
+
+              <div>
+                <input type="password" name="password" class="form-control" placeholder="密码" required="" ng-model="password" ng-keyup="$event.keyCode == 13 && login()"/>
+                <span style="color:red" ng-show="loginForm.password.$dirty && loginForm.password.$invalid  ||password.length<6 || password.length>80">
+                        <span ng-show="loginForm.password.$error.required">请填写密码</span>
+                        <span ng-show="password.length<6 || password.length>80">密码长度需大于6小于80</span>
+                </span>
+              </div>
+              <div>
+                <a class="btn btn-default submit" ng-disabled="( loginForm.user.$invalid  || userName.length<4 || userName.length>20) || (loginForm.password.$invalid  ||password.length<6 || password.length>80)" ng-click="login()">登陆</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+            </form>
+          </section>
+        </div>
+
+      </div>
+    </div>

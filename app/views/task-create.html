@@ -1,0 +1,163 @@
+<div ng-controller="taskCreateController">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <br />
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="task-name">任务名称 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="task-name" required="required" class="form-control col-md-7 col-xs-12" ng-model="taskName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="task-type">任务类型 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select id="task-type" class="form-control parsley-success" required="" ng-model="taskType" data-parsley-id="38">
+                                        <option value="1">微信朋友圈</option>
+                                        <option value="2">微信群</option>
+                                        <option value="3">QQ空间分享</option>
+                                        <option value="4">微博分享</option>
+                                        <option value="5">微信好友分享</option>
+                                        <option value="6">淘宝评论</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="task-count">任务数量 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" id="task-count" name="task-count" required="required" data-validate-minmax="0,100000" class="form-control col-md-7 col-xs-12" ng-model="taskCount">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="task-price" class="control-label col-md-3 col-sm-3 col-xs-12">任务单价 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" id="task-price" name="task-price" required="required" data-validate-minmax="0,100000" class="form-control col-md-7 col-xs-12" ng-model="taskPrice">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="task-audit-time" class="control-label col-md-3 col-sm-3 col-xs-12">审核周期 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" id="task-audit-time" name="task-audit-time" required="required" data-validate-minmax="0,240" class="form-control col-md-7 col-xs-12" ng-model="reviewPeriod">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="task-device">设备限制 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label class="checkbox-inline">
+                                        <input type="radio" checked value="0" id="task-device" name="task-device" ng-model="deviceTypeMask"> 不限制
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="radio" value="1" id="task-device2" name="task-device" ng-model="deviceTypeMask"> iOS
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="radio" value="2" id="task-device3" name="task-device" ng-model="deviceTypeMask"> Android
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="task-type">每人限制次数 <span class="required">*</span>
+                                </label>
+                                <!-- <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label class="checkbox-inline">
+                                        <input type="radio" checked value="1" id="optionsRadios1" name="task-rate-limit" ng-model="deviceTypeMask"> 每人一次
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="radio" value="2" id="optionsRadios2" name="task-rate-limit" ng-model="deviceTypeMask"> 每天一次
+                                    </label>
+                                </div> -->
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" name="task-rate-limit" required="required" data-validate-minmax="0,240" class="form-control col-md-7 col-xs-12" ng-model="eachPersonLimit">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="task-type">每天限制次数 <span class="required">*</span>
+                                </label>
+                                <!-- <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label class="checkbox-inline">
+                                        <input type="radio" checked value="1" id="optionsRadios1" name="task-rate-limit" ng-model="deviceTypeMask"> 每人一次
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="radio" value="2" id="optionsRadios2" name="task-rate-limit" ng-model="deviceTypeMask"> 每天一次
+                                    </label>
+                                </div> -->
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" name="task-rate-limit-day" required="required" data-validate-minmax="0,240" class="form-control col-md-7 col-xs-12" ng-model="recycleDaysLimit">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">起止时间 *
+                                </label>
+                                <div class="form-horizontal col-md-6 col-sm-6 col-xs-12">
+                                    <fieldset>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <div class="input-prepend input-group">
+                                                    <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                                                    <input type="text" name="reservation-time" id="reservation-time" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+
+                            <!-- task image -->
+                            <div class="img-clum">
+                                <div class="col-md-55" ng-repeat="item in imageUploader.queue">
+                                    <div class="thumbnail"  >
+                                        <div class="image view view-first">
+                                            <div ng-show="imageUploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                            <div class="mask" >
+                                                <p ng-click="item.hasDes = !item.hasDes">点击添加说明</p>
+                                                <div class="tools tools-bottom">
+                                                    <a href="" ng-click="item.remove()"><i class="fa fa-times"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="caption">
+                                            <strong style="margin-left: 20px">{{ item.file.name }}</strong>
+                                            <input type="text" class="form-control" placeholder="任务备注" ng-show="item.hasDes" ng-model="item.des">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <input id="lefile" type="file" style="display:none" nv-file-select uploader="imageUploader">  
+                                <span style="color:red" ng-show="imageUploader.queue.length<1">
+                                        请添加任务步骤
+                                </span>
+                                <div class="input-append" ng-show="imageUploader.queue.length<5">  
+                                          
+                                    <a class="btn btn-primary" onclick="$('input[id=lefile]').click();">添加文件</a>  
+                                </div> 
+                            </div>
+                            
+
+                            <!-- task image -->
+
+
+
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button class="btn btn-primary" type="button" ng-click="cancel()">取消</button>
+                                    <button class="btn btn-primary" type="reset">重置</button>
+                                    <button type="submit" class="btn btn-success" ng-click="commit()">创建</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

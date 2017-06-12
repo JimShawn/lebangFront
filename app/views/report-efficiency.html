@@ -1,0 +1,46 @@
+<div ng-controller="reportEfficiencyController">
+
+    <div class="row">
+                <div class="col-md-10 col-sm-10 col-xs-10">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>在办任务</h2>
+                            <div class="clearfix no-right"></div>
+                        </div>
+                    </div>
+                    <!-- <div class="input-group" style="width: 300px;float: right;">
+                            <input type="text" class="form-control" placeholder="按名称搜索">
+                            <span class="input-group-addon">搜索</span>
+                    </div> -->
+                    <div class="x_content">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th><a href="">用户名</a></th>
+                                <th>历史审核总数</th>
+                                <th>历史通过总数</th>
+                                <th>历史通过率</th>
+                                <td>本月审核总数</td>
+                                <th>本月通过总数</th>
+                                <th>本月通过率</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in showData">
+                                <td><a href="">{{item.reviewerUsername}}</a></td>
+                                <td>{{item.totalData.reviewedAmount}}</td>
+                                <td>{{item.totalData.acceptedAmount}}</td>
+                                <td>{{(item.totalData.acceptedAmount*100/item.totalData.reviewedAmount).toFixed(2)}}%</td>
+                                <td>{{item.reviewedAmount}}</td>
+                                <td>{{item.acceptedAmount}}</td>
+                                <td>{{(item.acceptedAmount*100/item.reviewedAmount).toFixed(2)}}%</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- <t-footer page-size = 'data.size' page-num = 'data.number' total-page = 'data.totalPages' total-num = 'data.totalElements' change-page-size-fun = 'changePageSizeFun(size)' goto-page-fun='gotoPageFun(page)'></t-footer> -->
+                </div>
+            </div>
+    
+</div>

@@ -1,0 +1,100 @@
+<div ng-controller="reportTaskController">
+	<div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select id="task-type" class="form-control parsley-success" data-parsley-id="38" ng-model="selectTask" ng-options="task.name for task in data.content" ng-change="changeTask()">
+                    </select>
+                </div>
+    </div>
+
+            <div class="ln_solid"></div>
+
+            <div class="row">
+                <div class="col-md-10 col-sm-10 col-xs-10">
+                    <div class="col-md-2 tile">
+                        <span>任务总数</span>
+                        <h2>{{selectTask.amount}}</h2>
+                    </div>
+                    <div class="col-md-2 tile">
+                        <span>审核通过</span>
+                        <h2>{{selectTask.acceptedAmount}}<br>{{selectTask.acceptedAmount*100/selectTask.amount}}%</h2>
+                    </div>
+                    <div class="col-md-2 tile">
+                        <span>提交总数</span>
+                        <h2>{{selectTask.completedAmount}}<br>{{selectTask.completedAmount*100/selectTask.amount}}%</h2>
+                    </div>
+                    <div class="col-md-2 tile">
+                        <span>开始时间</span>
+                        <h2>{{commonUtil.getDateFromInt(selectTask.beginTime)}}</h2>
+                    </div>
+                    <div class="col-md-2 tile">
+                        <span>结束时间</span>
+                        <h2>{{commonUtil.getDateFromInt(selectTask.endTime)}}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="ln_solid"></div>
+
+            <div class="row">
+                <div class="col-md-10 col-sm-10 col-xs-10">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>渠道每日消化走势<small>近30天</small></h2>
+                            <div class="clearfix no-right"></div>
+                        </div>
+                        <div class="x_content">
+                            <div id="echart_line" style="height:350px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ln_solid"></div>
+
+            <div class="row">
+                <div class="col-md-10 col-sm-10 col-xs-10">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>渠道贡献比例</h2>
+                            <div class="clearfix no-right"></div>
+                        </div>
+                        <div id="echart_pie" style="height:350px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ln_solid"></div>
+
+            <div class="row">
+                <div class="col-md-10 col-sm-10 col-xs-10">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>渠道审核通过率</h2>
+                        <div class="clearfix no-right"></div>
+                    </div>
+                    <div class="x_content">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>渠道名称</th>
+                                <th>提交量</th>
+                                <th>通过量</th>
+                                <th>通过率</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="task in data1">
+                                <th scope="row">{{$index+1}}</th>
+                                <td>{{task.appName}}</td>
+                                <td>{{task.completedAmount}}</td>
+                                <td>{{task.acceptedAmount}}</td>
+                                <td>{{(task.acceptedAmount*100/task.completedAmount).toFixed(2)}}%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+</div>

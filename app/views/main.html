@@ -1,0 +1,133 @@
+<div class="container body" ng-controller="mainController">
+  <div class="main_container">
+    <div class="col-md-3 left_col">
+      <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+          <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>乐榜任务管理系统</span></a>
+        </div>
+
+        <div class="clearfix" ></div>
+
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+          <div class="profile_pic">
+            <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+          </div>
+          <div class="profile_info">
+            <span>欢迎,{{nickname}}</span>
+          </div>
+        </div>
+        <!-- /menu profile quick info -->
+
+        <br />
+
+
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+          <div class="menu_section">
+            <h3>渠道，效率，快乐</h3>
+            <ul class="nav side-menu">
+              <li><a><i class="fa fa-home"></i> 首页 <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a ui-sref="main.homepage">工作台</a></li>
+                </ul>
+              </li>
+              <li><a><i class="fa fa-edit"></i> 配置 <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <!-- <li><a href="cfg_role.html">角色配置</a></li> -->
+                  <li><a ui-sref="main.accountCfg">账号配置</a></li>
+                  <li><a ui-sref="main.appcfg">渠道配置</a></li>
+                  <!-- <li><a href="cfg_task.html">任务配置</a></li>
+                  <li><a href="cfg_blacklist.html">黑名单配置</a></li> -->
+                </ul>
+              </li>
+              <li><a><i class="fa fa-desktop"></i> 任务 <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a ui-sref="main.taskcreate">创建任务</a></li>
+                  <li><a ui-sref="main.tasklist">任务列表</a></li>
+                  <li><a ui-sref="main.taskaudit">任务审核</a></li>
+                  <li><a ui-sref="main.taskauditLog">审核结果列表</a></li>
+                </ul>
+              </li>
+              <li><a><i class="fa fa-table"></i> 报表 <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a ui-sref="main.reportcompressive">综合分析</a></li>
+                  <li><a ui-sref="main.reportchannel">渠道分析</a></li>
+                  <li><a ui-sref="main.reporttask">任务报表</a></li>
+                  <li><a ui-sref="main.reportprofit">利润报表</a></li>
+                  <li><a ui-sref="main.reportefficiency">审核效率报表</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <!-- /sidebar menu -->
+
+        <!-- /menu footer buttons -->
+        <div class="sidebar-footer hidden-small">
+          <a data-toggle="tooltip" data-placement="top" title="Settings">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+          </a>
+          <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+          </a>
+          <a data-toggle="tooltip" data-placement="top" title="Lock">
+            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+          </a>
+          <a data-toggle="tooltip" data-placement="top" title="Logout" href=""  ng-click="logout()">
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+          </a>
+        </div>
+        <!-- /menu footer buttons -->
+      </div>
+    </div>
+
+    <!-- top navigation -->
+    <div class="top_nav">
+      <div class="nav_menu">
+        <nav>
+          <div class="nav toggle">
+            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+          </div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="">
+              <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <img src="images/img.jpg" alt="">{{nickname}}
+                <span class=" fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-usermenu pull-right">
+                <!-- <li><a href="javascript:;"> 资料</a></li>
+                <li>
+                  <a href="javascript:;">
+                    <span class="badge bg-red pull-right">50%</span>
+                    <span>设置</span>
+                  </a>
+                </li>
+                <li><a href="javascript:;">Help</a></li> -->
+                <li><a href=""  ng-click="logout()"><i class="fa fa-sign-out pull-right"></i> 退出</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- /top navigation -->
+
+    <!-- page content -->
+    <div class="right_col" role="main">
+      <div ui-view></div>
+    </div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+    <footer>
+      <div class="pull-right">
+        Copy Right Reserved @Lebang 2017
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+  </div>
+</div>

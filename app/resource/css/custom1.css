@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.mod-page .posi { 
+	display: inline; 
+	margin: 0 0 0 10px; 
+	line-height: 34px; 
+	float: left;
+}
+.clearfix{
+	display: block;
+	float: right;
+	margin:0px;
+}
+.img-small{
+	height: 100%;
+}
+.date-picker-custom{
+	width: 50%;
+}
+.no-right{
+	float: none;
+}
+.img-clum{
+	width: 100%;
+    min-height: 220px;
+}

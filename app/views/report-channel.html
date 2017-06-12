@@ -1,0 +1,72 @@
+<div ng-controller="reportChannelController">
+	<div class="row">
+                <div class="col-md-10 col-sm-10 col-xs-10">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>渠道流水走势</h2>
+                            <div class="clearfix no-right"></div>
+                        </div>
+                    </div>
+                    <div class="x_content">
+                        <div id="mainb" style="height:350px;"></div>
+                    </div>
+             	</div>
+    </div>
+
+    <div class="ln_solid"></div>
+
+            <div class="row">
+                <div class="col-md-10 col-sm-10 col-xs-10">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>渠道消化走势</h2>
+                            <div class="clearfix no-right"></div>
+                        </div>
+                    </div>
+                    <div class="x_content">
+                        <div id="echart_line" style="height:350px;"></div>
+                    </div>
+                </div>
+    </div>
+
+            <div class="ln_solid"></div>
+
+            <div class="row">
+                <div class="col-md-10 col-sm-10 col-xs-10">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>审核通过率排名</h2>
+                            <div class="clearfix no-right"></div>
+                        </div>
+                    </div>
+                    <!-- <div class="input-group" style="width: 300px;float: right;">
+			            <input type="text" class="form-control" placeholder="按名称搜索">
+			            <span class="input-group-addon">搜索</span>
+		        	</div> -->
+                    <div class="x_content">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th><a href="">渠道名称</a></th>
+                                <th>提交数量</th>
+                                <th>通过数量</th>
+                                <th>审核通过率</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="item in data">
+                                <td><a href="">{{item.appId}}</a></td>
+                                <td>{{item.completedAmount}}</td>
+                                <td>{{item.acceptedAmount}}</td>
+                                <td>{{(item.passRate*100).toFixed(2)}}%</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- <t-footer page-size = 'data.size' page-num = 'data.number' total-page = 'data.totalPages' total-num = 'data.totalElements' change-page-size-fun = 'changePageSizeFun(size)' goto-page-fun='gotoPageFun(page)'></t-footer> -->
+                </div>
+            </div>
+	
+</div>

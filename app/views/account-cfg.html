@@ -1,0 +1,131 @@
+<div ng-controller="accountCfgController">
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+			
+			<!-- <div class="input-group" style="width: 300px;float: right;">
+	            <input type="text" class="form-control" placeholder="按名称搜索">
+	            <span class="input-group-addon">搜索</span>
+        	</div> -->
+             <button type="submit" class="btn btn-success" style = "float: right;" ng-click="showInsertAppDialog()">新增</button>                       
+
+
+
+            <div class="x_panel">
+                <div class="x_content">
+                    <table id="datatable" class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th><a href="">账号</a></th>
+                            <th>昵称</th>
+                            <th>添加时间</th>
+                            <th>状态</th>
+                        </tr>
+                        </thead>
+
+
+                        <tbody>
+                        <tr ng-repeat="item in data.content">
+                            <td><a href="" ng-click="openDetailDialog(item)">{{item.username}}</a></td>
+                            <td>{{item.nickname == null?'':item.nickname}}</td>
+                            <td>{{commonUtil.getDateWithSecondsFromInt(item.createdTime)}}</td>
+                            <td>{{item.status ==1?'可用':'不可用'}}</td>
+                        </tr>
+
+                        
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <t-footer page-size = 'data.size' page-num = 'data.number' total-page = 'data.totalPages' total-num = 'data.totalElements' change-page-size-fun = 'changePageSizeFun(size)' goto-page-fun='gotoPageFun(page)'></t-footer>
+        </div>
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"        aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">新增账号</h4>
+                        </div>
+                        <div class="modal-body">
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="account-name">账号名称 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="app-name" required="required" class="form-control col-md-7 col-xs-12" ng-model="username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nick-name">账号昵称 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="app-name" required="required" class="form-control col-md-7 col-xs-12" ng-model="nickname">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="coount-role">账号角色 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select id="coount-role" class="form-control parsley-success" required="" ng-model="accountrole" data-parsley-id="38">
+                                        <option value="ROLE_ADMIN">管理员</option>
+                                        <option value="ROLE_TASK_REVIEWER">审批人员</option>
+                                        <option value="ROLE_REPORT_VIEWER">查看报表人员</option>
+                                    </select>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" ng-click="doInsert()">提交</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+        </div>
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"        aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">账号详情</h4>
+                        </div>
+                        <div class="modal-body">
+                        <form id="demo-form3" data-parsley-validate class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="user-name">账号名称 
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
+                                    <span>{{selectedUser.username}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nick-name">账号昵称 
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
+                                    <span>{{selectedUser.nickname == null?'':selectedUser.nickname}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="created-time">创建时间
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
+                                    <span>{{commonUtil.getDateWithSecondsFromInt(selectedUser.createdTime)}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">状态
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
+                                    <span>{{selectedUser.status ==1?'可用':'不可用'}}</span>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+        </div>
+	
+</div>

@@ -1,0 +1,192 @@
+<div ng-controller="taskAuditController">
+            
+
+
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="input-group" style="width: 300px;float: right;">
+                <input type="text" class="form-control" placeholder="按名称搜索">
+                <span class="input-group-addon">搜索</span>
+            </div>
+                <div class="x_panel">
+                    <div class="x_content">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th><a href="">任务名称</a></th>
+                                <th>类型</th>
+                                <th>单价</th>
+                                <th>提交者</th>
+                                <th>提交时间</th>
+                                <th>分发App</th>
+                                <th>图片</th>
+                                <th>拒绝</th>
+                                <th>通过</th>
+                            </tr>
+                            </thead>
+
+
+                            <tbody>
+
+
+
+                            <tr ng-repeat="item in data.content">
+                                <td><a href="" ng-click="openDetailDialog(item)">{{item.taskName}}</a></td>
+                                <td>{{item.taskTypeName}}</td>
+                                <td>{{item.price}}</td>
+                                <td>{{item.appUserId}}</td>
+                                <td>{{commonUtil.getDateWithSecondsFromInt(item.completedTime)}}</td>
+                                <td>{{item.appName}}</td>
+                                <td>
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-3" ng-show="item.images.split(',').length>0">
+                                            <a href="" class="thumbnail img-small" 
+                                            ng-click="showDialog(item,$index)">
+                                                <img ng-src="{{item.images.split(',')[0]}}"
+                                                     alt="">
+                                            
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-6 col-md-3" ng-show="item.images.split(',').length>1">
+                                            <a href="" class="thumbnail img-small" ng-click="showDialog(item,$index)">
+                                                <img ng-src="{{item.images.split(',')[1]}}"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-6 col-md-3" ng-show="item.images.split(',').length>2">
+                                            <a href="" class="thumbnail img-small" ng-click="showDialog(item,$index)">
+                                                <img ng-src="{{item.images.split(',')[2]}}"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-6 col-md-3" ng-show="item.images.split(',').length>3">
+                                            ...
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td><a href="" ng-click="showRefuseDialog(item)"><i class="fa fa-times"></i></a></td>
+                                <td><a href=""><i class="fa fa-check" ng-click="doPass(item)"></i></a></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <t-footer page-size = 'data.size' page-num = 'data.number' total-page = 'data.totalPages' total-num = 'data.totalElements' change-page-size-fun = 'changePageSizeFun(size)' goto-page-fun='gotoPageFun(page)'></t-footer>
+            </div>
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                图片查看
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="myCarousel" class="carousel slide" >
+                                <!-- 轮播（Carousel）指标 -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="{{$index}}" ng-class="{'active':selectedIndex==$index}" ng-repeat="item in selectedPicArray"></li>
+                                </ol>   
+
+                                <!-- 轮播（Carousel）项目 -->
+                                <div class="carousel-inner">
+                                    <div class="item" ng-class="{'active':selectedIndex==$index}" ng-repeat="item in selectedPicArray">
+                                    <img ng-src="{{item.url}}" alt="First slide">
+                                    </div>
+                                </div>
+                                <!-- 轮播（Carousel）导航 -->
+                                <a class="carousel-control left" data-slide="prev" ng-click="pageLeft()">‹</a>
+                                <a class="carousel-control right" data-slide="next" ng-click="pageRight()">›</a>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">拒绝原因</h4>
+                        </div>
+                        <div class="modal-body"><textarea ng-model="refuseReason">
+                            
+                        </textarea></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" ng-click="doRefuse()" ng-disabled="!refuseReason">提交</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"        aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">任务详情</h4>
+                        </div>
+                        <div class="modal-body">
+                        <form id="demo-form3" data-parsley-validate class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="task-name">任务名称 
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
+                                    <span>{{selectedTask.taskName}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="task-type">任务类型 
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
+                                    <span>{{selectedTask.taskTypeName}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="begin-time">提交时间
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
+                                    <span>{{commonUtil.getDateWithSecondsFromInt(selectedTask.completedTime)}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="end-time">提交者
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
+                                    <span>{{selectedTask.appUserId}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="price">单价
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
+                                    <span>{{selectedTask.price}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="amount">分发app
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
+                                    <span>{{selectedTask.appName}}</span>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+        </div>
+
+                
+</div>

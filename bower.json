@@ -1,0 +1,21 @@
+{
+  "name": "my-project",
+  "description": "",
+  "main": "",
+  "authors": [
+    "JimShawn <495629394@qq.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "^2.3.3",
+    "angularjs":"^1.6.0"
+  }
+}
