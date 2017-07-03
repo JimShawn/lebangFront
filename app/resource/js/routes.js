@@ -71,6 +71,11 @@ define([], function () {
                 templateUrl: 'views/account-cfg.html',
                 dependencies: ['scripts/controller/accountCfgController'],
                 url: '/accountCfg'
+            },
+            'main.taskTypeCfg':{
+                templateUrl: 'views/tasktype-cfg.html',
+                dependencies: ['scripts/controller/taskTypeCfgController'],
+                url: '/taskTypeCfg'
             }
             
             

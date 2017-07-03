@@ -58,6 +58,36 @@ app.factory('httpService',function ($http, $q, $window, commonProperty) {
         });
         return deferd.promise;
     };
+    api.taskTypeCreat = function (taskType) {
+        var deferd = $q.defer();
+        var url = commonProperty.serverHost + "task_types?access_token=" + $window.sessionStorage["access_token"];
+        $http.post(url,taskType).then(function (result) {
+            deferd.resolve(result);
+        },function (error) {
+            deferd.reject(error);
+        });
+        return deferd.promise;
+    };
+    api.getTaskTypeList = function (queryObj) {
+        var deferd = $q.defer();
+        var url =commonProperty.serverHost + "task_types?access_token=" + $window.sessionStorage["access_token"];
+        if(queryObj){
+            if (queryObj.size) {
+               url += "&size="+queryObj.size;
+            };
+            if (queryObj.page) {
+               url += "&page="+queryObj.page;
+            };
+        };
+        
+        
+        $http.get(url).then(function (result) {
+            deferd.resolve(result);
+        },function (error) {
+            deferd.reject(error);
+        });
+        return deferd.promise;
+    };
     api.accountCreate = function (user) {
         var deferd = $q.defer();
         var url = commonProperty.serverHost + "users?access_token=" + $window.sessionStorage["access_token"];
