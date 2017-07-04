@@ -18,13 +18,22 @@ define(['app','fileuploader','commonProperty','httpService','jquery','bootstrap'
  				 	id:3,
  				 	value:"其他"
  				 }];
+ 				 //获取任务类型
+ 				 httpService.getTaktypeListAll().then(function (res) {
+ 				 	$scope.tasktypeData = res.data;
+ 				 },function (err) {
+ 				 	// body...
+ 				 })
  				 $scope.commit = function(){
  				 	if (imageUploader.queue.length==0) {
  				 		return;
  				 	};
+ 				 	if (!$scope.taskType) {
+ 				 		return;
+ 				 	};
  				 	var task = {
  				 		name:$scope.taskName,
- 				 		taskTypeId:$scope.taskType,
+ 				 		taskTypeId:$scope.taskType.id,
  				 		amount:$scope.taskCount,
  				 		price:$scope.taskPrice,
  				 		cost:$scope.taskPrice,

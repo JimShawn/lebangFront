@@ -16,13 +16,8 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="task-type">任务类型 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select id="task-type" class="form-control parsley-success" required="" ng-model="taskType" data-parsley-id="38">
-                                        <option value="1">微信朋友圈</option>
-                                        <option value="2">微信群</option>
-                                        <option value="3">QQ空间分享</option>
-                                        <option value="4">微博分享</option>
-                                        <option value="5">微信好友分享</option>
-                                        <option value="6">淘宝评论</option>
+                                    <select id="task-type" class="form-control parsley-success" required="" ng-model="taskType" data-parsley-id="38" ng-options="tasktype.name for tasktype in tasktypeData">
+                                        <option value="">请选择</option>
                                     </select>
                                 </div>
                             </div>
