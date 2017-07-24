@@ -58,6 +58,16 @@ app.factory('httpService',function ($http, $q, $window, commonProperty) {
         });
         return deferd.promise;
     };
+    api.appDelete = function (id) {
+        var deferd = $q.defer();
+        var url = commonProperty.serverHost + "apps/"+id+"?access_token=" + $window.sessionStorage["access_token"];
+        $http.delete(url).then(function (result) {
+            deferd.resolve(result);
+        },function (error) {
+            deferd.reject(error);
+        });
+        return deferd.promise;
+    };
     api.taskTypeCreat = function (taskType) {
         var deferd = $q.defer();
         var url = commonProperty.serverHost + "task_types?access_token=" + $window.sessionStorage["access_token"];

@@ -32,7 +32,8 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  				};
  				$scope.doInsert = function (argument) {
  					var appObj = {
- 						clientId:$scope.appName
+ 						clientId:$scope.appName,
+ 						webServerRedirectUri:$scope.callbackUrl
  					};
  					httpService.appCreate(appObj).then(function (res) {
  						console.log(res);
@@ -42,6 +43,15 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  						// body...
  					})
  				};
+ 				$scope.deleteItem = function (item) {
+ 					// body...
+ 					httpService.appDelete(item.id).then(function (res) {
+ 						console.log(res);
+ 						$scope.query(null);
+ 					},function (err) {
+ 						console.log(err);
+ 					});
+ 				}
  				$scope.openDetailDialog = function (item) {
  					$scope.selectedApp = item;
  					$('#myModal2').modal('show');

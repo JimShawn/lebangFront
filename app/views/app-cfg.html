@@ -16,8 +16,9 @@
                         <thead>
                         <tr>
                             <th><a href="">名称</a></th>
+                            <th>回调地址</th>
                             <th>密匙</th>
-                            <th>状态</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
 
@@ -25,8 +26,9 @@
                         <tbody>
                         <tr ng-repeat="item in data.content">
                             <td><a href="" ng-click="openDetailDialog(item)">{{item.clientId}}</a></td>
+                             <td>{{item.webServerRedirectUri}}</td>
                             <td>{{item.clientSecret}}</td>
-                            <td>可用</td>
+                            <td><button type="button" class="btn btn-default" ng-click="deleteItem(item)">删除</button></td>
                         </tr>
 
                         
@@ -53,6 +55,13 @@
                                     <input type="text" id="app-name" required="required" class="form-control col-md-7 col-xs-12" ng-model="appName">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="callback-url">回调地址 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="callback-url" required="required" class="form-control col-md-7 col-xs-12" ng-model="callbackUrl">
+                                </div>
+                            </div>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -72,31 +81,24 @@
                         <div class="modal-body">
                         <form id="demo-form3" data-parsley-validate class="form-horizontal form-label-left">
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="app-id">app名称 
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
-                                    <span>{{selectedApp.id}}</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="app-name">app名称 
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
-                                    <span>{{selectedApp.name}}</span>
+                                    <span>{{selectedApp.clientId}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="callback-url">回调地址
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
+                                    <span>{{selectedApp.webServerRedirectUri}}</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="app-secret">密匙
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
-                                    <span>{{selectedApp.secret}}</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="app-status">状态
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 6px;">
-                                    <span>{{selectedApp.enabled ==1?'可用':'不可用'}}</span>
+                                    <span>{{selectedApp.clientSecret}}</span>
                                 </div>
                             </div>
                             </form>
