@@ -59,7 +59,7 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  					$('#myModal1').modal('show');
  				};
  				$scope.doPass = function(item){
- 					httpService.operateUserTask(item.id,2).then(function (res) {
+ 					httpService.operateUserTask(item.id,2,{}).then(function (res) {
  						console.log(res);
  						var queryObj2 = {
 	 						page:$scope.data.number,
