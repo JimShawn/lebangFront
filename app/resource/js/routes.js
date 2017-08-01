@@ -20,7 +20,10 @@ define([], function () {
             'main.taskcreate':{
                 templateUrl: 'views/task-create.html',
                 dependencies: ['scripts/controller/taskCreateController'],
-                url: '/taskcreate'
+                url: '/taskcreate',
+                params:{
+                    'item':null
+                }
             },
             'main.tasklist':{
                 templateUrl: 'views/task-list.html',

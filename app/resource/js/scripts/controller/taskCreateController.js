@@ -4,7 +4,32 @@ define(['app','fileuploader','commonProperty','httpService','jquery','bootstrap'
 	'flotpie','flottime','flotstack','flotresize','flotoderBars','flotspline','floecurvedLines',
 	'datejs','jqvmapWorld','jqvmapSampleData','mainInitService','ngThumb'], function(app,fileuploader,commonProperty,httpService) {
     app.controller('taskCreateController',['$scope','$location','$window','$state','mainService','FileUploader','commonProperty','httpService',function($scope, $location,$window,$state,mainService,FileUploader,commonProperty,httpService) {
- 				
+ 				 var selectedItem = $stateParams.item;
+ 				 if(!selectedItem){
+ 				 		$scope.taskName = selectedItem.name;
+ 				 		$scope.taskCount = selectedItem.amount;
+ 				 		$scope.taskPrice = selectedItem.price
+ 				 		$scope.reviewPeriod = selectedItem.reviewPeriod;
+ 				 		$scope.deviceTypeMask = selectedItem.deviceTypeMask;
+ 				 		$scope.eachPersonLimit = selectedItem.eachPersonLimit;
+ 				 		$scope.recycleDaysLimit = selectedItem.recycleDaysLimit;
+ 				 		$scope.startTime = selectedItem.beginTime;
+ 				 		$scope.endTime = selectedItem.endTime;
+ 				 		
+ 				 		//获取任务类型
+		 				 httpService.getTaktypeListAll().then(function (res) {
+		 				 	$scope.tasktypeData = res.data;
+		 				 	$scope.taskType = $scope.tasktypeData[selectedItem.taskTypeId]
+		 				 },function (err) {
+		 				 	// body...
+		 				 });
+		 				 //获取任务步骤
+		 				 httpService.getTaskProcedureById(selectedItem.id).then(function (res) {
+		 				 	console.log(res);
+		 				 },function (err) {
+		 				 	// body...
+		 				 })
+ 				 }
  				 $scope.TaskTypes = [{
  				 	id:0,
  				 	value:"体验"

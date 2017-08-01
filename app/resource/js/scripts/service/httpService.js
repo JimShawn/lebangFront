@@ -111,6 +111,19 @@ app.factory('httpService',function ($http, $q, $window, commonProperty) {
         });
         return deferd.promise;
     };
+    api.getTaskProcedureById = function (id) {
+        var deferd = $q.defer();
+        var url =commonProperty.serverHost + "task_procedures/"+id+"?access_token=" + $window.sessionStorage["access_token"];
+        
+        
+        
+        $http.get(url).then(function (result) {
+            deferd.resolve(result);
+        },function (error) {
+            deferd.reject(error);
+        });
+        return deferd.promise;
+    };
     api.accountCreate = function (user) {
         var deferd = $q.defer();
         var url = commonProperty.serverHost + "users?access_token=" + $window.sessionStorage["access_token"];

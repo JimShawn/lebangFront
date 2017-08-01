@@ -52,33 +52,36 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="account-name">账号名称 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="app-name" required="required" class="form-control col-md-7 col-xs-12" ng-model="username">
+                                    <input type="text" id="app-name" required class="form-control col-md-7 col-xs-12" ng-model="username" minlength="6" maxlength="20">
                                 </div>
+                                
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nick-name">账号昵称 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="app-name" required="required" class="form-control col-md-7 col-xs-12" ng-model="nickname">
+                                    <input type="text" id="app-name" required="required" class="form-control col-md-7 col-xs-12" ng-model="nickname" minlength="6" maxlength="20">
                                 </div>
+                             
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="coount-role">账号角色 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select id="coount-role" class="form-control parsley-success" required="" ng-model="accountrole" data-parsley-id="38">
-                                        <option value="ROLE_ADMIN">管理员</option>
-                                        <option value="ROLE_TASK_REVIEWER">审批人员</option>
+                                    <select id="coount-role" class="form-control parsley-success" required ng-model="accountrole" data-parsley-id="38">
+                                        <option value="ROLE_ADMIN" >管理员</option>
+                                        <option value="ROLE_TASK_REVIEWER" selected>审批人员</option>
                                         <option value="ROLE_REPORT_VIEWER">查看报表人员</option>
                                     </select>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="submit" class="btn btn-primary" ng-click="doInsert()">提交</button>
+                        </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary" ng-click="doInsert()">提交</button>
-                        </div>
+                        
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal -->
         </div>

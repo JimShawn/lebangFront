@@ -32,10 +32,24 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  				};
  				$scope.query(queryInitObj);
  				$scope.showInsertAppDialog = function(item){
- 					$scope.selectedItem = item;
+ 					$scope.username = "";
+ 					$scope.nickname = "";
+ 					$scope.accountrole = "ROLE_TASK_REVIEWER";
  					$('#myModal1').modal('show');
  				};
  				$scope.doInsert = function () {
+ 					if (!$scope.username || $scope.username.length<6 || $scope.username.length>20) {
+ 						$scope.accountWrong = true;
+ 						return;
+ 					};
+ 					if (!$scope.nickname || $scope.nickname.length<6 || $scope.nickname.length>20) {
+ 						$scope.nickNameWrong = true;
+ 						return;
+ 					};
+ 					if (!$scope.accountrole) {
+ 						$scope.accountroleWrong = true;
+ 						return;
+ 					};
  					var accountObj = {
  						username:$scope.username,
  						nickname:$scope.nickname,

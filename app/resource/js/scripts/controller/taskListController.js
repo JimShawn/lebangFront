@@ -27,8 +27,7 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  				};
  				$scope.query(null);
  				$scope.openDetailDialog = function (item) {
- 					$scope.selectedTask = item;
- 					$('#myModal2').modal('show');
+ 					$state.go('main.taskcreate',{item:item})
  				}
 
  				 
