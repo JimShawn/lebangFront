@@ -30,19 +30,6 @@ define(['app','fileuploader','commonProperty','httpService','jquery','bootstrap'
 		 				 	// body...
 		 				 })
  				 }
- 				 $scope.TaskTypes = [{
- 				 	id:0,
- 				 	value:"体验"
- 				 },{
- 				 	id:1,
- 				 	value:"互动"
- 				 },{
- 				 	id:2,
- 				 	value:"分享"
- 				 },{
- 				 	id:3,
- 				 	value:"其他"
- 				 }];
  				 //获取任务类型
  				 httpService.getTaktypeListAll().then(function (res) {
  				 	$scope.tasktypeData = res.data;
