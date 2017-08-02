@@ -5,6 +5,8 @@ define(['app','fileuploader','commonProperty','httpService','jquery','bootstrap'
 	'datejs','jqvmapWorld','jqvmapSampleData','mainInitService','ngThumb'], function(app,fileuploader,commonProperty,httpService) {
     app.controller('taskCreateController',['$scope','$location','$window','$state','mainService','FileUploader','commonProperty','httpService',function($scope, $location,$window,$state,mainService,FileUploader,commonProperty,httpService) {
  				 var selectedItem = $stateParams.item;
+ 				 var picArrays = [];
+ 				 var currentIndex = 0;
  				 if(!selectedItem){
  				 		$scope.taskName = selectedItem.name;
  				 		$scope.taskCount = selectedItem.amount;
@@ -61,7 +63,6 @@ define(['app','fileuploader','commonProperty','httpService','jquery','bootstrap'
  				 	httpService.taskCreate(task).then(function (res) {
  				 		console.log(res);
  				 		$scope.task = res.data;
- 				 		imageUploader.uploadAll();
  				 		
  				 	},function (err) {
  				 		console.log(err);
@@ -87,16 +88,15 @@ define(['app','fileuploader','commonProperty','httpService','jquery','bootstrap'
  				// 	var Authorization = 'UPYUN xiangqi:'+signature;
  				var imageUploader = $scope.imageUploader = new FileUploader({
 		                url: commonProperty.serverHost + "image/upload?access_token=" + $window.sessionStorage["access_token"],
-		                queueLimit: 5, //文件个数
+		                queueLimit: 1, //文件个数
 		            });
 
 				imageUploader.onAfterAddingFile = function(fileItem) {
-				        $scope.fileItem = fileItem._file;    //添加文件之后，把文件信息赋给scope
+				        imageUploader.uploadAll();
 				    };
 
  				imageUploader.onSuccessItem = function(fileItem, response, status, headers) {
-			        $scope.uploadStatus = true;   //上传成功则把状态改为true
-			        console.log(imageUploader);
+			        imageUploader.clearQueue(); 
 			        var index = imageUploader.getIndexOfItem(fileItem);
 			        var url = commonProperty.imgHost+response;
 			        var dec = imageUploader.queue[index].des;
