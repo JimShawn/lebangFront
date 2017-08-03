@@ -3,11 +3,11 @@ define(['app','fileuploader','commonProperty','httpService','jquery','bootstrap'
 	'gauge','bootstrapprogressbar','icheck','skycons','daterangepicker',
 	'flotpie','flottime','flotstack','flotresize','flotoderBars','flotspline','floecurvedLines',
 	'datejs','jqvmapWorld','jqvmapSampleData','mainInitService','ngThumb'], function(app,fileuploader,commonProperty,httpService) {
-    app.controller('taskCreateController',['$scope','$location','$window','$state','mainService','FileUploader','commonProperty','httpService',function($scope, $location,$window,$state,mainService,FileUploader,commonProperty,httpService) {
+    app.controller('taskCreateController',['$scope','$location','$window','$state','mainService','FileUploader','commonProperty','httpService','$stateParams',function($scope, $location,$window,$state,mainService,FileUploader,commonProperty,httpService,$stateParams) {
  				 var selectedItem = $stateParams.item;
- 				 var picArrays = [];
- 				 var currentIndex = 0;
- 				 if(!selectedItem){
+ 				 $scope.picArrays = [];
+ 				 $scope.currentIndex = 0;
+ 				 if(selectedItem){
  				 		$scope.taskName = selectedItem.name;
  				 		$scope.taskCount = selectedItem.amount;
  				 		$scope.taskPrice = selectedItem.price
@@ -63,6 +63,12 @@ define(['app','fileuploader','commonProperty','httpService','jquery','bootstrap'
  				 	httpService.taskCreate(task).then(function (res) {
  				 		console.log(res);
  				 		$scope.task = res.data;
+ 				 		//保存每一个步骤
+				        httpService.taskProcedureCreate($scope.task.id,$scope.picArrays).then(function (res) {
+	 				 		console.log(index);
+	 				 	},function (err) {
+	 				 		console.log(err);
+	 				 	})
  				 		
  				 	},function (err) {
  				 		console.log(err);
@@ -97,27 +103,16 @@ define(['app','fileuploader','commonProperty','httpService','jquery','bootstrap'
 
  				imageUploader.onSuccessItem = function(fileItem, response, status, headers) {
 			        imageUploader.clearQueue(); 
-			        var index = imageUploader.getIndexOfItem(fileItem);
-			        var url = commonProperty.imgHost+response;
-			        var dec = imageUploader.queue[index].des;
-			        var taskProcedure = {
-			        	taskId:$scope.task.id,
-			        	procedureOrder:index,
-			        	description:dec,
-			        	images:url
-			        };
-			        httpService.taskProcedureCreate(taskProcedure).then(function (res) {
- 				 		console.log(index);
- 				 	},function (err) {
- 				 		console.log(err);
- 				 	})
+			        $scope.picArrays.push({
+			        	url:commonProperty.imgHost+response,
+			        	dec:'',
+			        	order:$scope.currentIndex++
+			        });
 
 			    };
 			    imageUploader.onErrorItem = function(fileItem, response, status, headers) {
-			        $scope.uploadStatus = true;   //上传成功则把状态改为true
 			    };
 			    imageUploader.onCompleteAll = function () {
-			    	$state.go("main.tasklist");
 			    }
 
 			    $scope.cancel = function(){

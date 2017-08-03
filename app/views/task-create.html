@@ -14,7 +14,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="task-type">任务类型 <span class="required">*</span>
-                                </label>
+                                </label>        
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select id="task-type" class="form-control parsley-success" required="" ng-model="taskType" data-parsley-id="38" ng-options="tasktype.name for tasktype in tasktypeData">
                                         <option value="">请选择</option>
@@ -110,10 +110,10 @@
 
                             <!-- task image -->
                             <div class="img-clum">
-                                <div class="col-md-55" ng-repeat="item in imageUploader.queue">
+                                <div class="col-md-55" ng-repeat="item in picArrays">
                                     <div class="thumbnail"  >
                                         <div class="image view view-first">
-                                            <div ng-show="imageUploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                            <div > <img ng-src="{{item.url}}" width="100" height="100"></div>
                                             <div class="mask" >
                                                 <p ng-click="item.hasDes = !item.hasDes">点击添加说明</p>
                                                 <div class="tools tools-bottom">
@@ -132,7 +132,7 @@
                                 <span style="color:red" ng-show="imageUploader.queue.length<1">
                                         请添加任务步骤
                                 </span>
-                                <div class="input-append" ng-show="imageUploader.queue.length<5">  
+                                <div class="input-append" ng-show="picArrays.length<5">  
                                           
                                     <a class="btn btn-primary" onclick="$('input[id=lefile]').click();">添加文件</a>  
                                 </div> 
