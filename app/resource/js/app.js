@@ -10,6 +10,7 @@ define([ 'routes', 'loader', 'angularAMD', 'router','echarts' ], function(config
                     templateUrl : route.templateUrl,
                     url : route.url,
                     resolve : loader(route.dependencies),
+                    params:route.params
                 // allowAnonymous: route.allowAnonymous
                 });
             });

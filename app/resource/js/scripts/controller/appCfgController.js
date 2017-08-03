@@ -30,7 +30,17 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  					$scope.selectedItem = item;
  					$('#myModal1').modal('show');
  				};
+
+				$('#myModal1').on('hidden.bs.modal', function () {
+				  $scope.appName = "";
+				  $scope.callbackUrl = "";
+				});
+				$('#myModal2').on('hidden.bs.modal', function () {
+				  $scope.selectedApp = {};
+				})
  				$scope.doInsert = function (argument) {
+ 					if(!$scope.appName)return;
+ 					if(!$scope.callbackUrl)return;
  					var appObj = {
  						clientId:$scope.appName,
  						webServerRedirectUri:$scope.callbackUrl
@@ -53,7 +63,7 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  					});
  				}
  				$scope.openDetailDialog = function (item) {
- 					$scope.selectedApp = item;
+ 					$scope.selectedApp = angular.copy(item);
  					$('#myModal2').modal('show');
  				}
 

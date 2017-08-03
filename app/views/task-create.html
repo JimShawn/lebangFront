@@ -47,13 +47,13 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <label class="checkbox-inline">
-                                        <input type="radio" checked value="0" id="task-device" name="task-device" ng-model="deviceTypeMask"> 不限制
+                                        <input type="radio" checked value="0" id="task-device0" name="task-device" ng-model="deviceTypeMask" ng-checked="deviceTypeMask==0"> 不限制
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="radio" value="1" id="task-device2" name="task-device" ng-model="deviceTypeMask"> iOS
+                                        <input type="radio" value="1" id="task-device1" name="task-device" ng-model="deviceTypeMask" ng-checked="deviceTypeMask==1"> iOS
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="radio" value="2" id="task-device3" name="task-device" ng-model="deviceTypeMask"> Android
+                                        <input type="radio" value="2" id="task-device2" name="task-device" ng-model="deviceTypeMask" ng-checked="deviceTypeMask==2"> Android
                                     </label>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                                 <div class="col-md-55" ng-repeat="item in picArrays">
                                     <div class="thumbnail"  >
                                         <div class="image view view-first">
-                                            <div > <img ng-src="{{item.url}}" width="100" height="100"></div>
+                                            <div > <img ng-src="{{item.images}}" width="100" height="100"></div>
                                             <div class="mask" >
                                                 <p ng-click="item.hasDes = !item.hasDes">点击添加说明</p>
                                                 <div class="tools tools-bottom">
@@ -123,13 +123,13 @@
                                         </div>
                                         <div class="caption">
                                             <strong style="margin-left: 20px">{{ item.file.name }}</strong>
-                                            <input type="text" class="form-control" placeholder="任务备注" ng-show="item.hasDes" ng-model="item.des">
+                                            <input type="text" class="form-control" placeholder="任务备注" ng-show="item.hasDes" ng-model="item.description">
                                         </div>
                                     </div>
                                     
                                 </div>
                                 <input id="lefile" type="file" style="display:none" nv-file-select uploader="imageUploader">  
-                                <span style="color:red" ng-show="imageUploader.queue.length<1">
+                                <span style="color:red" ng-show="picArrays.length<1">
                                         请添加任务步骤
                                 </span>
                                 <div class="input-append" ng-show="picArrays.length<5">  

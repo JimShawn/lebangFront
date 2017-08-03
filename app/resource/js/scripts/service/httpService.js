@@ -58,6 +58,16 @@ app.factory('httpService',function ($http, $q, $window, commonProperty) {
         });
         return deferd.promise;
     };
+    api.appUpdate = function (app) {
+        var deferd = $q.defer();
+        var url = commonProperty.serverHost + "apps?access_token=" + $window.sessionStorage["access_token"];
+        $http.post(url,app).then(function (result) {
+            deferd.resolve(result);
+        },function (error) {
+            deferd.reject(error);
+        });
+        return deferd.promise;
+    };
     api.appDelete = function (id) {
         var deferd = $q.defer();
         var url = commonProperty.serverHost + "apps/"+id+"?access_token=" + $window.sessionStorage["access_token"];
@@ -113,7 +123,7 @@ app.factory('httpService',function ($http, $q, $window, commonProperty) {
     };
     api.getTaskProcedureById = function (id) {
         var deferd = $q.defer();
-        var url =commonProperty.serverHost + "task_procedures/"+id+"?access_token=" + $window.sessionStorage["access_token"];
+        var url =commonProperty.serverHost + "task_procedures/tasks/"+id+"?access_token=" + $window.sessionStorage["access_token"];
         
         
         
@@ -253,6 +263,7 @@ app.factory('httpService',function ($http, $q, $window, commonProperty) {
         });
         return deferd.promise;
     };
+
 
     
 
