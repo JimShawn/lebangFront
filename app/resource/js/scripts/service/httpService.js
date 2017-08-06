@@ -166,9 +166,9 @@ app.factory('httpService',function ($http, $q, $window, commonProperty) {
     };
     api.taskProcedureCreate = function (id,taskProcedureList) {
         var deferd = $q.defer();
-        var url = commonProperty.serverHost + "task_procedures?access_token=" + $window.sessionStorage["access_token"]+'&taskId='+id;
+        var url = commonProperty.serverHost + "task_procedures/tasks/"+id+"?access_token=" + $window.sessionStorage["access_token"];
        
-        $http.post(url,taskProcedureList).then(function (result) {
+        $http.put(url,taskProcedureList).then(function (result) {
             deferd.resolve(result);
         },function (error) {
             deferd.reject(error);
