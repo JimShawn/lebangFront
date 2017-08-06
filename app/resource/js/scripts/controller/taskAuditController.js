@@ -58,6 +58,10 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  					$scope.selectedItem = item;
  					$('#myModal1').modal('show');
  				};
+ 				$scope.showPassDialog = function(item){
+ 					$scope.selectedItem = item;
+ 					$('#myModal3').modal('show');
+ 				};
  				$scope.doPass = function(item){
  					httpService.operateUserTask(item.id,2,{}).then(function (res) {
  						console.log(res);
@@ -67,10 +71,10 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
 	 						status:1
  						};
  						$scope.query(queryObj2);
- 						$('#myModal1').modal('hide');
+ 						$('#myModal3').modal('hide');
  					},function (err) {
  						console.log(err);
- 						$('#myModal1').modal('hide');
+ 						$('#myModal3').modal('hide');
  					})
  				};
  				$scope.doRefuse = function(){

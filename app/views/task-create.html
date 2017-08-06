@@ -16,7 +16,7 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="task-type">任务类型 <span class="required">*</span>
                                 </label>        
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select id="task-type" class="form-control parsley-success" required="" ng-model="taskType" data-parsley-id="38" ng-options="tasktype.name for tasktype in tasktypeData">
+                                    <select id="task-type" class="form-control parsley-success" required="" ng-model="taskType" data-parsley-id="38" ng-options="tasktype1.name for tasktype1 in tasktypeData">
                                         <option value="">请选择</option>
                                     </select>
                                 </div>
@@ -113,17 +113,16 @@
                                 <div class="col-md-55" ng-repeat="item in picArrays">
                                     <div class="thumbnail"  >
                                         <div class="image view view-first">
-                                            <div > <img ng-src="{{item.images}}" width="100" height="100"></div>
+                                            <div > <img ng-src="{{item.images}}" width="150" height="150"></div>
                                             <div class="mask" >
-                                                <p ng-click="item.hasDes = !item.hasDes">点击添加说明</p>
                                                 <div class="tools tools-bottom">
-                                                    <a href="" ng-click="item.remove()"><i class="fa fa-times"></i></a>
+                                                    <a href="" ng-click="removePic($index)"><i class="fa fa-times"></i></a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="caption">
-                                            <strong style="margin-left: 20px">{{ item.file.name }}</strong>
-                                            <input type="text" class="form-control" placeholder="任务备注" ng-show="item.hasDes" ng-model="item.description">
+                                            <textarea class="form-control" ng-model="item.description" placeholder="任务备注" width="150" height="50">
+                                            </textarea>
                                         </div>
                                     </div>
                                     

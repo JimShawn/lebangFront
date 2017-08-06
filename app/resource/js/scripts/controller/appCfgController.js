@@ -65,6 +65,14 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  				$scope.openDetailDialog = function (item) {
  					$scope.selectedApp = angular.copy(item);
  					$('#myModal2').modal('show');
+ 				};
+ 				$scope.doUpdate = function () {
+ 					if(!$scope.selectedApp.appName)return;
+ 					if(!$scope.selectedApp.callbackUrl)return;
+ 					var appObj = {
+ 						clientId:$scope.appName,
+ 						webServerRedirectUri:$scope.callbackUrl
+ 					};
  				}
 
  				 

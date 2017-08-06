@@ -69,7 +69,7 @@
                                 </td>
                                 <td>{{item.note}}</td>
                                 <td><a href="" ng-click="showRefuseDialog(item)"><i class="fa fa-times"></i></a></td>
-                                <td><a href=""><i class="fa fa-check" ng-click="doPass(item)"></i></a></td>
+                                <td><a href=""><i class="fa fa-check" ng-click="showPassDialog(item)"></i></a></td>
                             </tr>
 
 
@@ -125,6 +125,27 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                             <button type="button" class="btn btn-primary" ng-click="doRefuse()" ng-disabled="!refuseReason">提交</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+            <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">提示</h4>
+                        </div>
+                        <div class="modal-body">
+                        <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pass-confirm" style="text-align: center;">确定通过？
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" ng-click="doPass(selectedItem)" >提交</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal -->

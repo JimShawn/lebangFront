@@ -36,6 +36,7 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  				$scope.openDetailDialog = function (item) {
  					$scope.selectedTask = item;
  					
+ 					
  					$('#myModal2').modal('show');
  				}
  				 

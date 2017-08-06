@@ -70,9 +70,26 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  				$scope.openDetailDialog = function (item) {
  					$scope.selectedUser = item;
  					$('#myModal2').modal('show');
+ 				};
+ 				$scope.forbidden = function (item) {
+ 					httpService.accountStatusChange(item.id,2).then(function (res) {
+                        var queryInitObj = {
+                            status:1
+                        };
+                        $scope.query(queryInitObj);
+                    },function (err) {
+                        // body...
+                    })
  				}
 
  				 
             }]
             );
+    app.filter('statusFilter',function () {
+    	return function (text) {
+    		if(text == 'ROLE_ADMIN')return '管理员';
+    		if(text == 'ROLE_TASK_REVIEWER')return '审批人员';
+    		if(text == 'ROLE_REPORT_VIEWER')return '查看报表人员';
+    	}
+    })
 });

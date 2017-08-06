@@ -48,6 +48,16 @@ app.factory('httpService',function ($http, $q, $window, commonProperty) {
         });
         return deferd.promise;
     };
+    api.taskUpdate = function (id,task) {
+        var deferd = $q.defer();
+        var url = commonProperty.serverHost + "tasks/"+id+"?access_token=" + $window.sessionStorage["access_token"];
+        $http.put(url,task).then(function (result) {
+            deferd.resolve(result);
+        },function (error) {
+            deferd.reject(error);
+        });
+        return deferd.promise;
+    };
     api.appCreate = function (app) {
         var deferd = $q.defer();
         var url = commonProperty.serverHost + "apps?access_token=" + $window.sessionStorage["access_token"];
@@ -144,10 +154,21 @@ app.factory('httpService',function ($http, $q, $window, commonProperty) {
         });
         return deferd.promise;
     };
-    api.taskProcedureCreate = function (taskProcedure) {
+    api.accountStatusChange = function (id,status) {
         var deferd = $q.defer();
-        var url = commonProperty.serverHost + "task_procedures?access_token=" + $window.sessionStorage["access_token"];
-        $http.post(url,taskProcedure).then(function (result) {
+        var url = commonProperty.serverHost + "users/"+id+"/status/"+status+"?access_token=" + $window.sessionStorage["access_token"];
+        $http.patch(url,{}).then(function (result) {
+            deferd.resolve(result);
+        },function (error) {
+            deferd.reject(error);
+        });
+        return deferd.promise;
+    };
+    api.taskProcedureCreate = function (id,taskProcedureList) {
+        var deferd = $q.defer();
+        var url = commonProperty.serverHost + "task_procedures?access_token=" + $window.sessionStorage["access_token"]+'&taskId='+id;
+       
+        $http.post(url,taskProcedureList).then(function (result) {
             deferd.resolve(result);
         },function (error) {
             deferd.reject(error);
