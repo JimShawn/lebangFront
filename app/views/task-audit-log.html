@@ -2,23 +2,27 @@
 	<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="form-group">
 		                <br>
-		                <div class="form-horizontal col-md-8 col-sm-8 col-xs-12 date-picker-custom">
-		                    <fieldset>
-		                        <div class="control-group">
-		                            <div class="controls">
-		                                <div class="input-prepend input-group">
-		                                    <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-		                                    <input type="text" name="reservation-time" id="reservation-time" class="form-control" value="01/01/2016 - 01/25/2016" />
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </fieldset>
-		                </div>
-		                <button type="button" class="btn btn-success">根据审核时间筛选</button>
-		                <div class="input-group" style="width: 300px;float: right;">
-				            <input type="text" class="form-control" placeholder="按名称搜索">
-				            <span class="input-group-addon">搜索</span>
-			        	</div>
+                        <div class="input-group" style="width: 300px;float: right;">
+                            <input type="text" class="form-control" placeholder="按名称搜索" ng-model="selectedName" ng-keyup="$event.keyCode == 13 && changeCondition()">
+                            <span class="input-group-addon" ng-click="changeCondition()">搜索</span>
+                        </div>
+		                <div class="input-group" style="width: 150px;float: right;margin: 10px;">
+                            状态:<select class="comm-select1" ng-model="selectedStatus" ng-options = "       statuse.name for statuse in statuses" ng-change="changeCondition()">
+                                <option value="">全部</option>
+                            </select>
+                        </div>
+                        <div class="input-group" style="width: 180px;float: right;margin: 10px;">
+                            任务类型:<select class="comm-select1" ng-model="selectedTaskType" ng-options = "       taskType.name for taskType in taskTypes" ng-change="changeCondition()">
+                                <option value="">全部</option>
+                            </select>
+                        </div>
+                        <div class="input-group" style="width: 150px;float: right;margin: 10px;">
+                            app:<select class="comm-select1" ng-model="selectedApp" ng-options = "       app.clientId for app in apps" ng-change="changeCondition()">
+                                <option value="">全部</option>
+                            </select>
+                        </div>
+		                
+		                
 		            </div>
 					
 	                <div class="x_panel">

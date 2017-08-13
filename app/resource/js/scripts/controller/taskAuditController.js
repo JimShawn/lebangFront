@@ -32,6 +32,19 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  					size:10,
  					status:1
  				};
+ 				//获取任务类型数组
+ 				httpService.getTaktypeListAll().then(function (res) {
+ 					$scope.taskTypes = res.data;
+ 				},function (err) {
+ 					$scope.taskTypes = [];
+ 				});
+ 				//获取app数组
+ 				httpService.getAppList({page:0,size:100}).then(function (res) {
+ 						console.log(res);
+ 						$scope.apps = res.data.content;
+ 					},function (err) {
+ 						console.log(err);
+ 					})
  				$scope.query(queryOriObj);
  				$scope.pageLeft = function(){
  					$("#myCarousel").carousel('prev');
@@ -100,6 +113,19 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  					$scope.selectedTask = item;
  					$('#myModal2').modal('show');
  				};
+
+ 				$scope.changeCondition = function () {
+ 					var temObj = {
+ 						page:$scope.data.page,
+ 						size:$scope.data.size,
+ 						status:1,
+ 						taskName:$scope.selectedName || ""
+ 					};
+ 					if($scope.selectedApp)temObj.appName= $scope.selectedApp.clientId;
+ 					if($scope.selectedTaskType)temObj.taskTypeName= $scope.selectedTaskType.name;
+ 					
+ 					$scope.query(temObj);
+ 				}
  				 
             }]
             );

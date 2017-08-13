@@ -5,9 +5,19 @@
 
     <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="input-group" style="width: 300px;float: right;">
-                <input type="text" class="form-control" placeholder="按名称搜索">
-                <span class="input-group-addon">搜索</span>
+                <input type="text" class="form-control" placeholder="按名称搜索" ng-keyup="$event.keyCode == 13 && changeCondition()" ng-model="selectedName">
+                <span class="input-group-addon" ng-click="changeCondition()">搜索</span>
             </div>
+                        <div class="input-group" style="width: 180px;float: right;margin: 10px;">
+                            任务类型:<select class="comm-select1" ng-model="selectedTaskType" ng-options = "       taskType.name for taskType in taskTypes" ng-change="changeCondition()">
+                                <option value="">全部</option>
+                            </select>
+                        </div>
+                        <div class="input-group" style="width: 150px;float: right;margin: 10px;">
+                            app:<select class="comm-select1" ng-model="selectedApp" ng-options = "       app.clientId for app in apps" ng-change="changeCondition()">
+                                <option value="">全部</option>
+                            </select>
+                        </div>
                 <div class="x_panel">
                     <div class="x_content">
                         <table id="datatable" class="table table-striped table-bordered">
@@ -99,14 +109,14 @@
                                 </ol>   
 
                                 <!-- 轮播（Carousel）项目 -->
-                                <div class="carousel-inner">
-                                    <div class="item" ng-class="{'active':selectedIndex==$index}" ng-repeat="item in selectedPicArray">
+                                <div class="carousel-inner" >
+                                    <div class="item" ng-class="{'active':selectedIndex==$index}" ng-repeat="item in selectedPicArray" >
                                     <img ng-src="{{item.url}}" alt="First slide">
                                     </div>
                                 </div>
                                 <!-- 轮播（Carousel）导航 -->
-                                <a class="carousel-control left" data-slide="prev" ng-click="pageLeft()">‹</a>
-                                <a class="carousel-control right" data-slide="next" ng-click="pageRight()">›</a>
+                                <a class="carousel-control left" data-slide="prev" ng-click="pageLeft()" style="vertical-align: middle;line-height: 250px;">‹</a>
+                                <a class="carousel-control right" data-slide="next" ng-click="pageRight()" style="vertical-align: middle;line-height: 250px;">›</a>
                             </div>
                         </div>
                     </div><!-- /.modal-content -->

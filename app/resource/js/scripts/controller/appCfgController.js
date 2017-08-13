@@ -67,12 +67,20 @@ define(['app','httpService','commonUtil','jquery','bootstrap',
  					$('#myModal2').modal('show');
  				};
  				$scope.doUpdate = function () {
- 					if(!$scope.selectedApp.appName)return;
- 					if(!$scope.selectedApp.callbackUrl)return;
+ 					if(!$scope.selectedApp.clientId)return;
+ 					if(!$scope.selectedApp.webServerRedirectUri)return;
  					var appObj = {
- 						clientId:$scope.appName,
- 						webServerRedirectUri:$scope.callbackUrl
+ 						clientId:$scope.clientId,
+ 						webServerRedirectUri:$scope.selectedApp.webServerRedirectUri
  					};
+ 					httpService.appUpdate($scope.selectedApp.id,appObj).then(function (res) {
+ 						if (res) {
+ 							$('#myModal2').modal('hide');
+ 							$scope.query(null);
+ 						}
+ 					},function (err) {
+ 						console.log(err);
+ 					})
  				}
 
  				 

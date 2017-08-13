@@ -68,10 +68,10 @@ app.factory('httpService',function ($http, $q, $window, commonProperty) {
         });
         return deferd.promise;
     };
-    api.appUpdate = function (app) {
+    api.appUpdate = function (id,app) {
         var deferd = $q.defer();
-        var url = commonProperty.serverHost + "apps?access_token=" + $window.sessionStorage["access_token"];
-        $http.post(url,app).then(function (result) {
+        var url = commonProperty.serverHost + "apps/"+id+"?access_token=" + $window.sessionStorage["access_token"];
+        $http.put(url,app).then(function (result) {
             deferd.resolve(result);
         },function (error) {
             deferd.reject(error);
@@ -262,6 +262,15 @@ app.factory('httpService',function ($http, $q, $window, commonProperty) {
             };
             if (queryObj.status) {
                 url += "&status="+queryObj.status;
+            };
+            if (queryObj.taskName) {
+                url += "&taskName="+queryObj.taskName;
+            };
+            if (queryObj.appName) {
+                url += "&appName="+queryObj.appName;
+            };
+            if (queryObj.taskTypeName) {
+                url += "&taskTypeName="+queryObj.taskTypeName;
             };
         };
         
